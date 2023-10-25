@@ -116,12 +116,38 @@ public class ZippoTest {
                 .get("http://api.zippopotam.us/tr/01000")
 
                 .then()
-                .statusCode(200)
                 //.log().body()
                 .body("places.'place name'",hasItem("Dörtağaç Köyü"))
+                .statusCode(200)
 
 
         ;
+    }
+
+    // Soru : "http://api.zippopotam.us/us/90210"  endpoint in dönen
+    // place dizisinin dizi uzunluğunun 1 olduğunu doğrulayınız.
+
+    @Test
+    public void bodyArrayHasSizeTest(){
+
+        given()
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+
+                .then()
+                .log().body()
+                .statusCode(200)
+                .body("places",hasSize(1)) //places in item size i 1 e esit mi
+
+
+
+        ;
+
+
+
+
+
+
     }
 
 
