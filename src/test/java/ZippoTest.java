@@ -74,11 +74,56 @@ public class ZippoTest {
                 .get("http://api.zippopotam.us/us/90210")
 
                       .then()
-                      .log().body() //donen degerlerin tumunu json data deniliyor. posymande body=pm.response.json(); ile aliyorduk -> body.country
-                .statusCode(200) //assertion
-                .body("country",equalTo("United States")) //assertion ->kutuphane ekleyecez kendi icinde test edecez
+                      //.log().body() //donen degerlerin tumunu json data deniliyor. posymande body=pm.response.json(); ile aliyorduk -> body.country
+                      .statusCode(200) //assertion
+                      .body("country",equalTo("United States")) //assertion ->kutuphane ekleyecez kendi icinde test edecez
+                //body nin country degiskeni "United States" e esit mi
 
         ;
 
     }
+
+
+    //Soru : http://api.zippopotam.us/us/90210 endpointten donen place dizisinin ilknelemaninin state degerlerinin  "California" oldugunu
+    @Test
+    public void checkStateInResponseBody(){
+        //bir bilginin degerini
+        given()
+
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+
+                .then()
+                //.log().body() //donen degerlerin tumunu json data deniliyor. posymande body=pm.response.json(); ile aliyorduk -> body.country
+                .statusCode(200) //assertion
+                .body("places[0].state",equalTo("California")) //assertion ->kutuphane ekleyecez kendi icinde test edecez
+        //body nin country degiskeni "United States" e esit mi
+
+        // places.state -> herhangi bir index vermezsek tumunu verir.
+        ;
+    }
+
+
+    // Soru : "http://api.zippopotam.us/tr/01000"  endpoint in dönen
+    // place dizisinin herhangi bir elemanında  "Dörtağaç Köyü" değerinin
+    // olduğunu doğrulayınız
+    @Test
+    public void checkHasItem(){
+
+        given()
+
+                .when()
+                .get("http://api.zippopotam.us/tr/01000")
+
+                .then()
+                .statusCode(200)
+                //.log().body()
+                .body("places.'place name'",hasItem("Dörtağaç Köyü"))
+
+
+        ;
+    }
+
+
+
 }
