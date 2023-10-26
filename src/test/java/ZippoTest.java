@@ -1,4 +1,13 @@
 import io.restassured.http.ContentType;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.internal.RequestSpecificationImpl;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -174,6 +183,9 @@ public class ZippoTest {
         ;
     }
 
+    // .param() bir HTTP GET veya POST isteği sırasında sorgu parametreleri eklemek için kullanılır. Sorgu parametreleri, EndPointin yani URL'nin sonuna ekliyoruz ve isteğin hedef kaynağa API sunucusuna ilgili verileri iletmek için kullanılır.
+    //Örneğin, .param("page", 1) ile /api/resource?page=1 gibi bir URL oluşturabiliyoruz.
+
     @Test
     public void queryParamTest(){
         // meta -> saklanan bilgi tum bilgi
@@ -194,7 +206,7 @@ public class ZippoTest {
     }
 
     @Test
-    public void Test2(){
+    public void queryParamTest2(){
         // https://gorest.co.in/public/v1/users?page=3
         // bu linkteki 1 den 10 kadar sayfaları çağırdığınızda response daki donen page degerlerinin
         // çağrılan page nosu ile aynı olup olmadığını kontrol ediniz.
@@ -211,17 +223,89 @@ public class ZippoTest {
 
                     .then()
                     .statusCode(200)
-                    .body("meta.pagination.page",equalTo(i))
-                    .log().body()
+                    .body("meta.pagination.page",equalTo(i)) //json finder dan page in path ine ulastim.
+                    //.log().body()
             ;
 
 
         }
+    }
+
+    //her methodda kullanacagimiz seyleri genelliyoruz
+    RequestSpecification requestSpec;
+    ResponseSpecification responseSpec;
+    @BeforeClass
+    public void setup(){
+        baseURI = "https://gorest.co.in/public/v1";
+
+        requestSpec= new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .log(LogDetail.URI)  // log().uri()
+                .build();
+
+        responseSpec = new ResponseSpecBuilder()
+                .expectStatusCode(200)  // statusCode(200)
+                .log(LogDetail.BODY)
+                .expectContentType(ContentType.JSON)
+                .build();
+    }
+
+    @Test
+    public void requestResponseSpecificationn(){
+        given()
+                .param("page",1)
+                .spec(requestSpec)
+
+                .when()
+                .get("/users") // http hok ise baseUri baş tarafına gelir.
+
+                .then()
+                .spec(responseSpec)
+        ;
+    }
+
+    @Test
+    public void extratingJsonPath(){
+
+        String countryName =
+                given()
+                        .when()
+                        .get("http://api.zippopotam.us/us/90210")
+
+                        .then()
+                        .extract().path("country") //path i country olan
+
+        ;
+
+        System.out.println("countryName = " + countryName);
+        Assert.assertEquals(countryName,"United States");
 
 
 
     }
 
+    // // Soru : "http://api.zippopotam.us/us/90210"  endpoint indne dönen
+    //    // place dizisinin ilk elemanının state değerinin  "California"
+    //    // olduğunu testNG Assertion ile doğrulayınız
+    @Test
+    public void extratingJsonPath2(){
+
+        String placeState =
+                given()
+                        .when()
+                        .get("http://api.zippopotam.us/us/90210")
+
+                        .then()
+                        .extract().path("places[0].state" ) //path i country olan
+
+                ;
+
+        System.out.println("placeState in ilk elemani = " + placeState);
+        Assert.assertEquals(placeState,"California");
+
+
+
+    }
 
 
 
