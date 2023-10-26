@@ -1,0 +1,15 @@
+https://gorest.co.in/public/v2/users/628354
+http://api.zippopotam.us/us/90210
+http://api.zippopotam.us/tr/01000
+PathParam
+
+
+https://sonuc.osym.gov.tr/Sorgu.aspx?SonucID=9750
+QueryParam
+
+
+topla/a/b
+
+public void topla(int a, int b){
+   toplam=a+b
+}

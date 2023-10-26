@@ -20,10 +20,6 @@ public class ZippoTest {
 
                     .then()
                     //assertion , test,data islemleri
-
-
-
-
         ;
 
     }
@@ -43,7 +39,6 @@ public class ZippoTest {
                 .log().body() // donen body json data, log().All() : data disindaki her sey
                 .statusCode(200); //test kismi oldugundan adderstion status code 200 mu 201 yazinca hata veriyor
 
-
     }
 
     @Test
@@ -61,8 +56,6 @@ public class ZippoTest {
                 .log().body() // donen body json data, log().All() : data disindaki her sey
                 .statusCode(200)
                 .contentType(ContentType.JSON); // donen datanin tipi JSON mi
-
-
     }
 
     @Test
@@ -82,8 +75,6 @@ public class ZippoTest {
         ;
 
     }
-
-
     //Soru : http://api.zippopotam.us/us/90210 endpointten donen place dizisinin ilknelemaninin state degerlerinin  "California" oldugunu
     @Test
     public void checkStateInResponseBody(){
@@ -102,8 +93,6 @@ public class ZippoTest {
         // places.state -> herhangi bir index vermezsek tumunu verir.
         ;
     }
-
-
     // Soru : "http://api.zippopotam.us/tr/01000"  endpoint in dönen
     // place dizisinin herhangi bir elemanında  "Dörtağaç Köyü" değerinin
     // olduğunu doğrulayınız
@@ -128,7 +117,7 @@ public class ZippoTest {
     // place dizisinin dizi uzunluğunun 1 olduğunu doğrulayınız.
 
     @Test
-    public void bodyArrayHasSizeTest(){
+    public void bodyArrayHasSizeTest2(){
 
         given()
                 .when()
@@ -138,17 +127,70 @@ public class ZippoTest {
                 .log().body()
                 .statusCode(200)
                 .body("places",hasSize(1)) //places in item size i 1 e esit mi
-
+                //.body("places.size()",hasSize(1))
 
 
         ;
 
+
+    }
+
+    //coklu test , biri fail olursa digerleri bundan etkilenmiyor
+    @Test
+    public void combiningTest(){
+
+        given()
+
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+
+                .then()
+                .log().body()
+                .statusCode(200)
+                .body("places",hasSize(1))
+                .body("places[0].state",equalTo("California"))
+                .body("places[0].'place name'",equalTo("Beverly Hills"))
+                .body("country",equalTo("United States"))
+
+                ;
+
+    }
+
+    @Test
+    public void pathParamTest(){
+        // / varsa path param
+
+        given()
+                //biryerden okuyup gonderme islemi
+                .pathParam("ulke","us") //ulke degiskenine us ata
+                .pathParam("postaKod",90210) //postakodu
+                .log().uri() // request link gitmeden calismadan onceki hali
+
+                .when()
+                .get("http://api.zippopotam.us/{ulke}/{postaKod}")
+
+                .then()
+                .statusCode(200)
+        ;
+    }
+
+    @Test
+    public void queryParamTest(){
+        given()
+                .when()
+                .get("https://gorest.co.in/public/v1/users?page=1&per_page=3")
+
+                .then()
+
+
+                ;
 
 
 
 
 
     }
+
 
 
 
