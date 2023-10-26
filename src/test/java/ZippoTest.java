@@ -306,7 +306,27 @@ public class ZippoTest {
 
 
     }
+    // Soru : "http://api.zippopotam.us/us/90210"  endpoint indne dönen
+    // place dizisinin ilk elemanının place name değerinin  "Beverly Hills"
+    // olduğunu testNG Assertion ile doğrulayınız
+    @Test
+    public void extratingJsonPath3(){
+
+        String placeName =
+                given()
+                        .when()
+                        .get("http://api.zippopotam.us/us/90210")
+
+                        .then()
+                        .extract().path("places[0].'place name'" ) //places[0]["place name"]
+
+                ;
+
+        System.out.println("placeState in ilk elemani place name değerinin = " + placeName);
+        Assert.assertEquals(placeName,"Beverly Hills");
 
 
+
+    }
 
 }
