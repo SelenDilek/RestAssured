@@ -179,7 +179,7 @@ public class ZippoTest {
         // meta -> saklanan bilgi tum bilgi
         given()
 
-                .param("page",1)
+                .param("page",1) //?page=1 seklinde linke ekleniyor //queryparam ile de kullanilabiliyor.
                 .log().uri() //before request
 
 
@@ -189,11 +189,34 @@ public class ZippoTest {
                 .then()
                 .statusCode(200)
                 .log().body()
-
-
                 ;
 
+    }
 
+    @Test
+    public void Test2(){
+        // https://gorest.co.in/public/v1/users?page=3
+        // bu linkteki 1 den 10 kadar sayfaları çağırdığınızda response daki donen page degerlerinin
+        // çağrılan page nosu ile aynı olup olmadığını kontrol ediniz.
+        for (int i = 1; i <10 ; i++) {
+
+            given()
+
+                    .param("page",i) //?page=1 seklinde linke ekleniyor //queryparam ile de kullanilabiliyor.
+                    .log().uri() //before request
+
+
+                    .when()
+                    .get("https://gorest.co.in/public/v1/users") //?page=1
+
+                    .then()
+                    .statusCode(200)
+                    .body("meta.pagination.page",equalTo(i))
+                    .log().body()
+            ;
+
+
+        }
 
 
 
