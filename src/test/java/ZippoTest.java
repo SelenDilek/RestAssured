@@ -176,11 +176,19 @@ public class ZippoTest {
 
     @Test
     public void queryParamTest(){
+        // meta -> saklanan bilgi tum bilgi
         given()
+
+                .param("page",1)
+                .log().uri() //before request
+
+
                 .when()
-                .get("https://gorest.co.in/public/v1/users?page=1&per_page=3")
+                .get("https://gorest.co.in/public/v1/users") //?page=1
 
                 .then()
+                .statusCode(200)
+                .log().body()
 
 
                 ;
