@@ -227,7 +227,6 @@ public class ZippoTest {
                     //.log().body()
             ;
 
-
         }
     }
 
@@ -324,6 +323,29 @@ public class ZippoTest {
 
         System.out.println("placeState in ilk elemani place name değerinin = " + placeName);
         Assert.assertEquals(placeName,"Beverly Hills");
+
+
+
+    }
+
+    // Soru : "https://gorest.co.in/public/v1/users"  endpoint in den dönen
+    // limit bilgisinin 10 olduğunu testNG ile doğrulayınız.
+
+    @Test
+    public void extratingJsonPath4(){
+        int limit =
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().path("meta.pagination.limit" ) //places[0]["place name"]
+
+                ;
+
+        System.out.println("Endpoint limit  = " + limit);
+        Assert.assertEquals(limit,10);
+        Assert.assertTrue(limit==10);
 
 
 
