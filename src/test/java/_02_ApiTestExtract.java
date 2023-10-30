@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.List;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -167,22 +168,20 @@ public class _02_ApiTestExtract {
 
        List<Integer> idler= incomingData.path("data.id");
        List<String> names = incomingData.path("data.name");
+
+
        int limit = incomingData.path("meta.pagination.limit");
 
         System.out.println(idler);
         System.out.println(names);
         System.out.println(limit);
 
-        Assert.assertTrue(names.contains("Mahesh Menon"));
 
+
+        Assert.assertTrue(names.contains("Mahesh Menon"));
         Assert.assertTrue(idler.contains(5599126)); // string degil int tipi
         Assert.assertTrue(limit==10);
-
-
-
-
-
-
+        Assert.assertFalse(names.get(5).isEmpty());
         }
 
 
