@@ -44,4 +44,32 @@ public class _03_ApiTestPOJO {
     }
 
 
+    //Soru: http://api.zippopotam.us/tr/01000  endpointinden dönen verilerden "Dörtağaç Köyü" ait bilgileri yazdırınız
+    @Test
+    public void extractJsonAll_POJO2(){
+        Location locationNesnesi =
+                given()
+                        .when()
+                        .get("http://api.zippopotam.us/tr/01000")
+
+                        .then()
+                        .extract().body().as(Location.class)
+
+
+                ;
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 }
