@@ -173,6 +173,10 @@ public class _02_ApiTestExtract {
         System.out.println(names);
         System.out.println(limit);
 
+        Assert.assertTrue(names.contains("Mahesh Menon"));
+
+        Assert.assertTrue(idler.contains("5599126"));
+
 
 
 
