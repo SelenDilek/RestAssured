@@ -128,13 +128,13 @@ public class _02_ApiTestExtract {
     @Test
     public void extratingJsonPath6(){
         // itum nameler icin:
-        List<Integer> names =
+        List<String> names =
                 given()
                         .when()
                         .get("https://gorest.co.in/public/v1/users")
 
                         .then()
-                        //.log().body()
+                        .log().body()
                         .extract().path("data.name" ) //data[0].id -> ilk id
 
                 ;
@@ -143,8 +143,12 @@ public class _02_ApiTestExtract {
         System.out.println(names.size());
         Assert.assertTrue(names.size()==10);
 
+        for(String nameList : names){ //integer yazdigimizda hata aliyoruz.
+            System.out.println(nameList);
+        }
 
 
+// Not : cift tirnak arasinda ise integer olamaz ama integer a izin veriyor bu bug dir.
 
     }
 
