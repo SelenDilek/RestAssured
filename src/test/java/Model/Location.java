@@ -1,9 +1,11 @@
 package Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 
 public class Location {
-     private String postcode;
+     private String postcode; //fakat karisilinda yazilisi post code hata aldik bu yuzden
      private String country;
      private String countryabbreviation;
      private ArrayList<Place> places;
@@ -12,6 +14,7 @@ public class Location {
         return postcode;
     }
 
+    @JsonProperty("post code") //DEV ILE BIZIM YAZDIGIMIZI ESLESTIRIYORUZ CUNKU JAVA post code gibi bosluklu yazimi kabul etmez
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
@@ -28,6 +31,7 @@ public class Location {
         return countryabbreviation;
     }
 
+    @JsonProperty("country abbreviation")
     public void setCountryabbreviation(String countryabbreviation) {
         this.countryabbreviation = countryabbreviation;
     }
@@ -38,5 +42,15 @@ public class Location {
 
     public void setPlaces(ArrayList<Place> places) {
         this.places = places;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "postcode='" + postcode + '\'' +
+                ", country='" + country + '\'' +
+                ", countryabbreviation='" + countryabbreviation + '\'' +
+                ", places=" + places +
+                '}';
     }
 }

@@ -1,4 +1,5 @@
 import Model.Location;
+import Model.Place;
 import org.testng.annotations.Test;
 
 import java.util.Locale;
@@ -9,10 +10,11 @@ public class _03_ApiTestPOJO {
 //POJO : JSON nesnesi : locationNesnesi (JSON dilini javaya ceviriyoruz)
     //kullanimi kolaylastirmak icin yapiyoruz. veriler var kalibini hazirliyoruz donusum yapip kullanacza
 
+    //developer in yaptigi islemin tersini yapiyoruz
     @Test
     public void extractJsonAll_POJO(){
         //Ogrnci cinsinden ogr gibi Ogrenci ogr1 = new Ogrenci();
-        Location location =
+        Location locationNesnesi =
         given()
                 .when()
                 .get("http://api.zippopotam.us/us/90210")
@@ -25,8 +27,20 @@ public class _03_ApiTestPOJO {
 
                 ;
 
+        System.out.println(" locationNesnesi.getCountry() = " + locationNesnesi.getCountry());
+
+        System.out.println("locationNesnesi.getPlaces() = " + locationNesnesi.getPlaces());
+
+        for(Place p : locationNesnesi.getPlaces()){
+
+            System.out.println("p = " + p);
+        }
 
 
+
+// JSonaDonustur(locationNesnesi); developer bu şekilde dönüştürmüştü
+// Json.Serialise(locationNesnesi);  bende tersine deSerialize yaptım.
+// yani NESNE yi elde ettim.
     }
 
 
