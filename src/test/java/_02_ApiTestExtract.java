@@ -106,7 +106,7 @@ public class _02_ApiTestExtract {
 
     @Test
     public void extratingJsonPath5(){
-        // ilk elementin id si : // coklu yapida extract islemi
+        // ilk elementin id si : // coklu yapida extract islemi -> data.id tum id ler yani bir liste var
         List<Integer> idler =
                 given()
                         .when()
@@ -119,6 +119,29 @@ public class _02_ApiTestExtract {
                 ;
 
         System.out.println("Endpoint limit  = " + idler);
+
+
+
+
+    }
+
+    @Test
+    public void extratingJsonPath6(){
+        // itum nameler icin:
+        List<Integer> names =
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        //.log().body()
+                        .extract().path("data.name" ) //data[0].id -> ilk id
+
+                ;
+
+        System.out.println("Endpoint limit  = " + names + "\t");
+        System.out.println(names.size());
+        Assert.assertTrue(names.size()==10);
 
 
 
