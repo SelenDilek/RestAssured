@@ -55,18 +55,15 @@ public class _03_ApiTestPOJO {
                         .then()
                         .extract().body().as(Location.class)
 
-
                 ;
 
+        for (Place p : locationNesnesi.getPlaces()){
+            if(p.getPlacename().equalsIgnoreCase("Dörtağaç Köyü")){
+                System.out.println(p);
+            }
 
 
-
-
-
-
-
-
-
+        }
     }
 
 
