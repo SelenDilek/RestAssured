@@ -61,12 +61,7 @@ public class _03_ApiTestPOJO {
             if(p.getPlacename().equalsIgnoreCase("Dörtağaç Köyü")){
                 System.out.println(p);
             }
-
-
         }
+
     }
-
-
-
-
 }
