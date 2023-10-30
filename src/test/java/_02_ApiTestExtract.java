@@ -175,7 +175,9 @@ public class _02_ApiTestExtract {
 
         Assert.assertTrue(names.contains("Mahesh Menon"));
 
-        Assert.assertTrue(idler.contains("5599126"));
+        Assert.assertTrue(idler.contains(5599126)); // string degil int tipi
+        Assert.assertTrue(limit==10);
+
 
 
 
