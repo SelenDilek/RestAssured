@@ -2,12 +2,12 @@ import io.restassured.http.ContentType;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
@@ -151,6 +151,33 @@ public class _02_ApiTestExtract {
 // Not : cift tirnak arasinda ise integer olamaz ama integer a izin veriyor bu bug dir.
 
     }
+
+    @Test
+    public void extratingJsonPathResponseAll(){
+        // itum nameler icin:
+        Response incomingData=
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().response();
+
+                ;
+
+       List<Integer> idler= incomingData.path("data.id");
+       List<String> names = incomingData.path("data.name");
+       int limit = incomingData.path("meta.pagination.limit");
+
+        System.out.println(idler);
+        System.out.println(names);
+        System.out.println(limit);
+
+
+
+
+
+        }
 
 
 
