@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -101,6 +103,28 @@ public class _02_ApiTestExtract {
 
 
     }
+
+    @Test
+    public void extratingJsonPath5(){
+        // ilk elementin id si : // coklu yapida extract islemi
+        List<Integer> idler =
+                given()
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .log().body()
+                        .extract().path("data.id" ) //data[0].id -> ilk id
+
+                ;
+
+        System.out.println("Endpoint limit  = " + idler);
+
+
+
+
+    }
+
 
 
 }
