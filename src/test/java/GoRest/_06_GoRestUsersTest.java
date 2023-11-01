@@ -36,7 +36,7 @@ public class _06_GoRestUsersTest {
 
         baseURI="https://gorest.co.in/public/v2/users"; //baseURI mutlaka ilk tanimlanmali
         reqSpec=new RequestSpecBuilder()
-                .addHeader("Authorization", "Bearer dcc3254806885a9bfb9137e6b22e9f6637ca8bfcd05268fd911eafc373e9bf0f")
+                .addHeader("Authorization", "Bearer b1aaa4d8bfef49260c26060bb827fe1732490b76c6abd2d68480dabb2709f1b5")
                 .setContentType(ContentType.JSON)
                 .build();
 
@@ -164,6 +164,7 @@ public class _06_GoRestUsersTest {
 
         given()
                 .spec(reqSpec)
+                .body(updateUser)
 
                 .when()
                 .put(""+userID)
