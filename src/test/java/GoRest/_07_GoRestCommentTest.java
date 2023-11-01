@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 // GoRest Comment API Testing
 public class _07_GoRestCommentTest {
     Faker randomUretici = new Faker();
-    int userID=0;
+    int commonID=0;
 
     RequestSpecification reqSpec;
 
@@ -53,6 +53,7 @@ public class _07_GoRestCommentTest {
         String rndFullName= randomUretici.name().fullName();
         String rndEmail= randomUretici.internet().emailAddress();
         String rndBody =randomUretici.expression("Maiores aut id. Exercitationem quae.");
+        //String rndBody2 =randomUretici.lorem().paragraph();
 
 
         Map<String,String> newComments = new HashMap<>();
@@ -64,7 +65,7 @@ public class _07_GoRestCommentTest {
 
 
 
-        userID=
+       commonID=
                 given() //giden body, token, contentType
                         .spec(reqSpec)
                         .body(newComments) //giden body tipi zaten JSON sen bunu direkt koy kendisi otomatik JSON a cevirip gonderiyor
@@ -79,7 +80,7 @@ public class _07_GoRestCommentTest {
                         .statusCode(201)
                         .extract().path("id");
         ;
-        System.out.println("userID = " + userID);
+        System.out.println("userID = " + commonID);
 
 
     }
@@ -89,13 +90,13 @@ public class _07_GoRestCommentTest {
                 .spec(reqSpec)
 
                 .when()
-                .get(""+userID)
+                .get(""+commonID)
 
                 .then()
                 .log().body()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("id",equalTo(userID))
+                .body("id",equalTo(commonID))
         ;
 
     }
@@ -110,12 +111,12 @@ public class _07_GoRestCommentTest {
                 .body(updateComments)
 
                 .when()
-                .put(""+userID)
+                .put(""+commonID)
 
                 .then()
                 .log().body()
                 .statusCode(200)
-                .body("id",equalTo(userID))
+                .body("id",equalTo(commonID))
                 .body("name", equalTo("DSln"))
         ;
     }
@@ -125,7 +126,7 @@ public class _07_GoRestCommentTest {
                 .spec(reqSpec)
 
                 .when()
-                .delete(""+userID)
+                .delete(""+commonID)
 
                 .then()
                 .log().all()
@@ -141,7 +142,7 @@ public class _07_GoRestCommentTest {
                 .spec(reqSpec)
 
                 .when()
-                .delete(""+userID)
+                .delete(""+commonID)
 
                 .then()
                 // .log().all()
