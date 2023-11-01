@@ -1,10 +1,10 @@
 package Model;
-
-public class todos2 {
-    int userId;
-    int id;
-    String title;
-    boolean completed;
+//set kismi json in veriyi almasi icin onemli
+public class ToDo {
+   private int userId; //private yapilir
+   private int id;
+   private String title;
+   private boolean completed;
 
     public int getUserId() {
         return userId;

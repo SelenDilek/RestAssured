@@ -1,4 +1,5 @@
-import Model.todos2;
+import Model.ToDo;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -70,21 +71,22 @@ public class _04_Tasks {
      create a request to https://jsonplaceholder.typicode.com/todos/2
      expect status 200
      Converting Into POJO*/
-
+//daha developer yazmadan web sayfasi ortada yokken methodlari kontrol etmek lazim dogru olup olmadigi icin
     @Test
     public void task3(){
 
-        todos2 todos =
+        ToDo todo =
         given()
                 .when()
                 .get("https://jsonplaceholder.typicode.com/todos/2")
                 .then()
                 .statusCode(200)
-                .extract().body().as(Model.todos2.class)
+                .extract().body().as(ToDo.class) //class sablonunu istiyorum
 
                 ;
+        System.out.println(todo);
 
-        Assert.assertTrue(todos.getId()==2);
+        Assert.assertTrue(todo.getId()==2);
 
     }
 
