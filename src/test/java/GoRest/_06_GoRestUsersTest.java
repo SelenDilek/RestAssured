@@ -157,16 +157,20 @@ public class _06_GoRestUsersTest {
     }
 
 
-    @Test
+    @Test(dependsOnMethods = "getUserById") //collection run gibi oldu postmandeki sirali calisacak birbirine bagladik
     public  void updateUser(){
         Map<String,String> updateUser = new HashMap<>();
         updateUser.put("name","DSln");
 
         given()
                 .spec(reqSpec)
+
                 .when()
-                .put("")
+                .put(""+userID)
+
                 .then()
+                .log().body()
+                .statusCode(200)
                 .body("id",equalTo(userID))
                 .body("name", equalTo("DSln"))
                 ;
