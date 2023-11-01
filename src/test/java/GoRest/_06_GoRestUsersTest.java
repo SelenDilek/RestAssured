@@ -159,7 +159,14 @@ public class _06_GoRestUsersTest {
 
     @Test
     public  void updateUser(){
+        Map<String,String> updateUser = new HashMap<>();
 
+        given()
+                .spec(reqSpec)
+                .when()
+                .put("")
+                .then()
+                ;
 
 
 
