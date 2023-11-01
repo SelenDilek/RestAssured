@@ -104,7 +104,6 @@ public class _06_GoRestUsersTest {
         System.out.println("userID = " + userID);
 
 
-
     }
 
 
@@ -139,7 +138,6 @@ public class _06_GoRestUsersTest {
         System.out.println("userID = " + userID);
 
     }
-
 
     @Test(dependsOnMethods = "createUserMap") //bunu calisitirnca digerini de beraber calistirir
     public void getUserById(){ //giden body yok ama authoriztn var
