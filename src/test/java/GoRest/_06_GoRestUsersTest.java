@@ -160,12 +160,15 @@ public class _06_GoRestUsersTest {
     @Test
     public  void updateUser(){
         Map<String,String> updateUser = new HashMap<>();
+        updateUser.put("name","DSln");
 
         given()
                 .spec(reqSpec)
                 .when()
                 .put("")
                 .then()
+                .body("id",equalTo(userID))
+                .body("name", equalTo("DSln"))
                 ;
 
 
