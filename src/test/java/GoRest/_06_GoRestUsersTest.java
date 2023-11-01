@@ -176,16 +176,34 @@ public class _06_GoRestUsersTest {
                 ;
     }
 
-    @Test
+    @Test(dependsOnMethods = "updateUser")
     public void deleteUser(){
         given()
                 .spec(reqSpec)
+
                 .when()
-                .delete("")
+                .delete(""+userID)
+
                 .then()
+                .log().all()
                 .statusCode(204)
 
                 ;
-
+//tumunu calistirmak lazim class in tumunu
     }
+
+    @Test(dependsOnMethods = "deleteUser")
+    public void deleteUserNegativeTest(){
+        given()
+                .spec(reqSpec)
+
+                .when()
+                .delete(""+userID)
+
+                .then()
+               // .log().all()
+                .statusCode(404)
+        ;
+    }
+
 }
