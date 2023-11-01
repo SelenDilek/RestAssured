@@ -155,4 +155,14 @@ public class _06_GoRestUsersTest {
                 ;
 
     }
+
+
+    @Test
+    public  void updateUser(){
+
+
+
+
+
+    }
 }
