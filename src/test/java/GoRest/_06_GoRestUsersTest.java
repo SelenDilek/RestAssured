@@ -174,9 +174,18 @@ public class _06_GoRestUsersTest {
                 .body("id",equalTo(userID))
                 .body("name", equalTo("DSln"))
                 ;
+    }
 
+    @Test
+    public void deleteUser(){
+        given()
+                .spec(reqSpec)
+                .when()
+                .delete("")
+                .then()
+                .statusCode(204)
 
-
+                ;
 
     }
 }
