@@ -156,11 +156,5 @@ public class _06_GoRestUsersTest {
                 .body("id",equalTo(userID))
                 ;
 
-
-
-
-
-
-
     }
 }
