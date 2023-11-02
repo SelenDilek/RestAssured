@@ -13,12 +13,15 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 public class CountryTest {
 
     RequestSpecification reqSpec;
     Faker randomUretici = new Faker();
     String countryID="";
+    String rndCountryName="";
+    String rndCountryCode="";
     @BeforeClass
     public void Setup(){
 
@@ -51,8 +54,8 @@ public class CountryTest {
 
     @Test
     public void countryTest(){ //dependson a gerek yok zaten bagli
-        String rndCountryName = randomUretici.address().country()+randomUretici.address().countryCode();
-        String rndCountryCode = randomUretici.address().countryCode();
+         rndCountryName = randomUretici.address().country()+randomUretici.address().countryCode();
+         rndCountryCode = randomUretici.address().countryCode();
 
 
         Map<String,String> newCountry= new HashMap<>();
@@ -72,26 +75,22 @@ public class CountryTest {
                 .then()
                 //.log().body()
                 .statusCode(201)
-                .extract().path("id") // id otomatik geliyor direkt extract yapabiliriz
+                .extract().path("id")
+
+                // id otomatik geliyor direkt extract yapabiliriz
 
                 ;
     }
 
-    //
+    //// Aynı countryName ve code gönderildiğinde kayıt yapılmadığını yani createCountryNegative testini yapınız donen sonuctan already mesajini al
 
-    @Test
-    public void countryNegativeTest(){ //dependson a gerek yok zaten bagli
-        String rndCountryName = randomUretici.address().country()+randomUretici.address().countryCode();
-        String rndCountryCode = randomUretici.address().countryCode();
-
-
+    @Test(dependsOnMethods = "countryTest") //bi tane olunca otomatik calistirir. dependson bir kademe yukari gider
+    public void createCountryNegative(){
         Map<String,String> newCountry= new HashMap<>();
         newCountry.put("name",rndCountryName);
         newCountry.put("code",rndCountryCode);
-        //newCountry.put("translateName","[]");
 
 
-        countryID= //bizim id tipimiz string onu donusturemez int yaparsak.
                 given()
                         .spec(reqSpec)
                         .body(newCountry)
@@ -100,9 +99,9 @@ public class CountryTest {
                         .post("school-service/api/countries")
 
                         .then()
-                        //.log().body()
-                        .statusCode(201)
-                        .extract().path("id") // id otomatik geliyor direkt extract yapabiliriz
+                        .log().body() //bunu yazdik ki mesaji gorelim
+                        .statusCode(400)
+                        .body("message",containsString("already"))// id otomatik geliyor direkt extract yapabiliriz
 
         ;
     }
