@@ -1,3 +1,5 @@
+package APITest;
+
 import io.restassured.http.ContentType;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;

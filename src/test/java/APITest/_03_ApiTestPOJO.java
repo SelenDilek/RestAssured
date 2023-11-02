@@ -1,3 +1,5 @@
+package APITest;
+
 import Model.Location;
 import Model.Place;
 import org.testng.annotations.Test;

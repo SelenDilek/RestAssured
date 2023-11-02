@@ -1,8 +1,7 @@
-import Model.ToDo;
+package APITest;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import Model.ToDo;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

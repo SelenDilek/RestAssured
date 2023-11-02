@@ -7,13 +7,11 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+
 //POSTMANDEKI Users kismini restassured ile yapiyoruz
 public class _06_GoRestUsersTest {
     //bilgileri postmanden aldik manuel olarak yapmistik ilk basta
@@ -23,9 +21,6 @@ public class _06_GoRestUsersTest {
 // "email":"{{$randomEmail}}",
 // "status":"active"
 // }
-
-
-
     Faker randomUretici = new Faker();
     int userID=0;
 
@@ -39,14 +34,7 @@ public class _06_GoRestUsersTest {
                 .addHeader("Authorization", "Bearer b1aaa4d8bfef49260c26060bb827fe1732490b76c6abd2d68480dabb2709f1b5")
                 .setContentType(ContentType.JSON)
                 .build();
-
-
-
-
     }
-
-
-
     @Test(enabled = false)
     public void createUser(){
 

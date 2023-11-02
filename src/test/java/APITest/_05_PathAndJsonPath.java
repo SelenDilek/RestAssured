@@ -1,14 +1,11 @@
+package APITest;
+
 import Model.Location;
 import Model.Place;
 import Model.User;
 import org.testng.annotations.Test;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-
 import java.util.List;
-
 import static io.restassured.RestAssured.*;
 
 public class _05_PathAndJsonPath {
