@@ -70,16 +70,43 @@ public class CountryTest {
                 .post("school-service/api/countries")
 
                 .then()
-                .log().body()
+                //.log().body()
                 .statusCode(201)
                 .extract().path("id") // id otomatik geliyor direkt extract yapabiliriz
 
                 ;
-
-
-
-
     }
+
+    //
+
+    @Test
+    public void countryNegativeTest(){ //dependson a gerek yok zaten bagli
+        String rndCountryName = randomUretici.address().country()+randomUretici.address().countryCode();
+        String rndCountryCode = randomUretici.address().countryCode();
+
+
+        Map<String,String> newCountry= new HashMap<>();
+        newCountry.put("name",rndCountryName);
+        newCountry.put("code",rndCountryCode);
+        //newCountry.put("translateName","[]");
+
+
+        countryID= //bizim id tipimiz string onu donusturemez int yaparsak.
+                given()
+                        .spec(reqSpec)
+                        .body(newCountry)
+
+                        .when()
+                        .post("school-service/api/countries")
+
+                        .then()
+                        //.log().body()
+                        .statusCode(201)
+                        .extract().path("id") // id otomatik geliyor direkt extract yapabiliriz
+
+        ;
+    }
+
 
 
 
