@@ -4,7 +4,7 @@
     <test
           name="Main Test">
         <classes>
-            <class name="GoRest._06_GoRestUsersTest">
+            <class name="Campus._08_CountryTest">
             </class>
         </classes>
     </test>
