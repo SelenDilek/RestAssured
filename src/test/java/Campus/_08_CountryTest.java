@@ -217,7 +217,7 @@ public class _08_CountryTest {
 
                 .then()
                 .log().body()
-                .statusCode(500)
+                .statusCode(201)
                 .extract().path("id");
         ;
     }
