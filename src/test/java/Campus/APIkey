@@ -1,0 +1,8 @@
+endpointiniz:
+https://l9njuzrhf3.execute-api.eu-west-1.amazonaws.com/prod/user
+Barear Token yerine
+Api Key -> key , value
+key: x-api-key
+value:GwMco9Tpstd5vbzBzlzW9I7hr6E1D7w2zEIrhOra
+
+headers secersek headerse ekliyor token i.
