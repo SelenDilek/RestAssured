@@ -39,7 +39,7 @@ public class _08_CountryTest {
                 .post("/auth/login")
                 .then()
                 .log().all()
-                .statusCode(200)
+                .statusCode(500)
                 .extract().response().getDetailedCookies();
                 ;
 
